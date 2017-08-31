@@ -1,0 +1,21 @@
+{
+    "name": "kriss/yii2-wang-editor",
+    "description": "Yii2 wangeditor widget",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","wangeditor","editor"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "kriss",
+            "email": "462679766@qq.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "kriss\\wangEditor\\": ""
+        }
+    }
+}
