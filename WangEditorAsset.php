@@ -6,10 +6,10 @@ use yii\web\AssetBundle;
 
 class WangEditorAsset extends AssetBundle
 {
-    public $sourcePath = '@npm/dist/wang-editor';
+    public $sourcePath = '@npm/wangeditor/release';
     public $css = [
     ];
     public $js = [
-        'wangEditor.js'
+        'wangEditor.min.js'
     ];
 }
