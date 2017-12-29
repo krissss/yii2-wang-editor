@@ -20,6 +20,7 @@ php composer.phar require --prefer-dist kriss/yii2-wang-editor "*"
 ```php
 echo \kriss\wangEditor\WangEditorWidget::widget([
     'name' => 'inputName',
+    //'canFullScreen' => true, // 增加全屏的按钮
 ]);
 ```
 
