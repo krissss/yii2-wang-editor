@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "*",
+        "yiisoft/yii2": ">=2.0.6",
         "npm-asset/wangeditor": "^3.0"
     },
     "autoload": {

@@ -21,6 +21,12 @@ class WangEditorWidget extends InputWidget
      * @var string
      */
     public $clientJs;
+    /**
+     * 是否显示全屏
+     * @link https://github.com/chris-peng/wangEditor-fullscreen-plugin
+     * @var bool
+     */
+    public $canFullScreen = false;
 
     /**
      * @var string
@@ -51,6 +57,9 @@ class WangEditorWidget extends InputWidget
     {
         $view = $this->getView();
         WangEditorAsset::register($view);
+        if ($this->canFullScreen) {
+            WangEditorFullScreenAsset::register($view);
+        }
 
         $id = $this->_editorId;
         $name = 'editor' . $this->id;
@@ -68,6 +77,16 @@ var {$name} = new WangEditor('#{$id}');
 {$clientJs}
 {$name}.create();
 JS;
+        if ($this->canFullScreen) {
+            $js .= <<<JS
+WangEditor.fullscreen.init('#{$id}');
+JS;
+        }
         $view->registerJs($js);
+    }
+
+    protected function registerFullScreenAsset()
+    {
+
     }
 }
