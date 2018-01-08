@@ -84,9 +84,4 @@ JS;
         }
         $view->registerJs($js);
     }
-
-    protected function registerFullScreenAsset()
-    {
-
-    }
 }
