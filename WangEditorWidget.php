@@ -44,7 +44,7 @@ class WangEditorWidget extends InputWidget
         if ($this->hasModel()) {
             echo Html::activeHiddenInput($this->model, $this->attribute, $this->options);
             $attribute = $this->attribute;
-            $content = $this->model->$attribute;
+            $content = Html::getAttributeValue($this->model, $attribute);
         } else {
             echo Html::hiddenInput($this->name, $this->value, $this->options);
             $content = $this->value;
@@ -83,5 +83,10 @@ WangEditor.fullscreen.init('#{$id}');
 JS;
         }
         $view->registerJs($js);
+    }
+
+    protected function registerFullScreenAsset()
+    {
+
     }
 }
