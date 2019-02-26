@@ -3,68 +3,58 @@ Yii2 wangEditor widget
 
 Yii2 wangEditor widget
 
+v2.x 与 [v1.x](https://github.com/krissss/yii2-wang-editor/tree/v1.2) 版本之间存在差异，升级请注意
+
 [wangEditor 官网](http://www.wangeditor.com/)
 
 安装
 ------------
 
 ```
-php composer.phar require --prefer-dist kriss/yii2-wang-editor "*"
+composer require kriss/yii2-wang-editor
 ```
 
 使用
 -----
 
-基本当 widget 使用：
+### widget
  
 ```php
-echo \kriss\wangEditor\WangEditorWidget::widget([
+<?php
+use kriss\wangEditor\widgets\WangEditorWidget;
+
+echo WangEditorWidget::widget([
     'name' => 'inputName',
     //'canFullScreen' => true, // 增加全屏的按钮
+    //'customConfig' => [], // 扩展配置
+]);
+// or
+echo $form->field($model, 'content')->widget(WangEditorWidget::class, [
+    //'canFullScreen' => true,
 ]);
 ```
 
-放在 ActiveForm 中使用：
+### action
 
 ```php
-$form = new \yii\widgets\ActiveForm();
-echo $form->field($model, 'content')->widget(\kriss\wangEditor\WangEditorWidget::className());
-```
+<?php
 
-配置
------
+namespace admin\controllers;
 
-## clientJs 客户端 js 扩展
+use yii\web\Controller;
+use kriss\wangEditor\actions\UploadAction;
 
-可替换变量：
-
- - `{name}`:editor实例
- - `{hiddenInputId}`:隐藏输入域的id
-
-配置举例：
-
-```php
-'clientJs' => <<<JS
-// 设置上传文件路径
-{name}.customConfig.uploadImgServer = '/upload/wang';
-// 将富文本的数据更改后加入到隐藏域，该方法默认已经配置，不需要重复写，可以覆盖写
-{name}.customConfig.onchange = function (html) {
-   $('#{hiddenInputId}').val(html);
+class FileController extends Controller
+{
+    public function actions()
+    {
+        return [
+            'wang-editor' => [
+                'class' => UploadAction::class,
+                'savePath' => '@webroot/uploads',
+                'displayPath' => '@web/uploads',
+            ],
+        ];
+    }
 }
-JS
-```
-
-更多配置见[官网配置](https://www.kancloud.cn/wangfupeng/wangeditor3/332599)
-
-完整例子设置图片上传的路径
------
-
-```php
-$clientJs = <<<JS
-{name}.customConfig.uploadImgServer = '/upload/wang';
-JS;
-echo \kriss\wangEditor\WangEditorWidget::widget([
-    'name' => 'content',
-    'clientJs' => $clientJs
-]);
 ```

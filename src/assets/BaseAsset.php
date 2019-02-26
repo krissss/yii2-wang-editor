@@ -1,10 +1,10 @@
 <?php
 
-namespace kriss\wangEditor;
+namespace kriss\wangEditor\assets;
 
 use yii\web\AssetBundle;
 
-class WangEditorAsset extends AssetBundle
+class BaseAsset extends AssetBundle
 {
     public $sourcePath = '@npm/wangeditor/release';
     public $css = [
