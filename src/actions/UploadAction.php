@@ -3,6 +3,7 @@
 namespace kriss\wangEditor\actions;
 
 use yii\base\DynamicModel;
+use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
 class UploadAction extends BaseAction
@@ -32,6 +33,12 @@ class UploadAction extends BaseAction
      * @var callable
      */
     public $saveFileCallback;
+    /**
+     * 是否创建文件夹
+     * 对于将 savePath 设置为 '@webroot/uploads/' . date('Y-m-d') 时非常有用
+     * @var bool
+     */
+    public $createDirection = true;
 
     public function run()
     {
@@ -69,6 +76,9 @@ class UploadAction extends BaseAction
         $filename = $this->getFileName($uploadedFile, $this->savePath);
         if ($this->saveFileCallback && is_callable($this->saveFileCallback)) {
             return call_user_func($this->saveFileCallback, $filename, $uploadedFile, $this);
+        }
+        if ($this->createDirection) {
+            FileHelper::createDirectory(dirname($filename));
         }
         return $uploadedFile->saveAs($filename);
     }
