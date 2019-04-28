@@ -107,9 +107,9 @@ class UploadAction extends BaseAction
             if ($this->fileSaveNameCallback && is_callable($this->fileSaveNameCallback)) {
                 $filename = call_user_func($this->fileSaveNameCallback, $uploadedFile, $this);
             } else {
-                $filename = md5(microtime() + random_int(10000, 99999));
+                $filename = md5(microtime() . random_int(10000, 99999));
             }
-            if (strpos('.', $filename) === false) {
+            if (strpos($filename, '.') === false) {
                 $filename .= '.' . $uploadedFile->getExtension();
             }
             $this->filenames[$uploadedFile->tempName] = $filename;
